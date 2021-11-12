@@ -4,6 +4,16 @@ import torch
 from torch import nn
 
 
+class Keypoints2dSmoothL1Loss(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.smooth_l1_loss = nn.SmoothL1Loss()
+
+    def forward(self, keypoints2d_pred, keypoints2d_gt):
+        loss = self.smooth_l1_loss(keypoints2d_pred, keypoints2d_gt).mean()
+        return loss
+
+
 class KeypointsMSELoss(nn.Module):
     def __init__(self):
         super().__init__()

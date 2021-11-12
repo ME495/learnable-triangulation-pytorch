@@ -292,6 +292,8 @@ class VolumetricTriangulationNet(nn.Module):
                 base_point = (keypoints_3d[11, :3] + keypoints_3d[12, :3]) / 2
             elif self.kind == "mpii":
                 base_point = keypoints_3d[6, :3]
+            elif self.kind == "stb":
+                base_point = np.mean(keypoints_3d[:, :3], axis=0)
 
             base_points[batch_i] = torch.from_numpy(base_point).to(device)
 
@@ -324,6 +326,8 @@ class VolumetricTriangulationNet(nn.Module):
                 axis = [0, 1, 0]  # y axis
             elif self.kind == "mpii":
                 axis = [0, 0, 1]  # z axis
+            elif self.kind == "stb":
+                axis = [0, 1, 0]  # y axis
 
             center = torch.from_numpy(base_point).type(torch.float).to(device)
 

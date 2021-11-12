@@ -343,7 +343,7 @@ def get_pose_net(config, device='cuda:0'):
         if 'state_dict' in pretrained_state_dict:
             pretrained_state_dict = pretrained_state_dict['state_dict']
 
-        prefix = "module."
+        prefix = "module.backbone."
 
         new_pretrained_state_dict = {}
         for k, v in pretrained_state_dict.items():
