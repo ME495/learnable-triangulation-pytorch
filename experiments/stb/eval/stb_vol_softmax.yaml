@@ -1,0 +1,79 @@
+title: "stb_vol_softmax"
+kind: "stb"
+vis_freq: 10000
+vis_n_elements: 1
+
+image_shape: [384, 384]
+
+opt:
+  criterion: "MAE"
+  loss_2d: false
+
+  use_volumetric_ce_loss: true
+  volumetric_ce_loss_weight: 0.01
+
+  n_objects_per_epoch: 15000
+  n_epochs: 9999
+
+  batch_size: 4
+  val_batch_size: 1
+
+  lr: 0.0001
+  process_features_lr: 0.001
+  volume_net_lr: 0.001
+
+  scale_keypoints_3d: 0.1
+
+model:
+  name: "vol"
+  kind: "stb"
+  volume_aggregation_method: "softmax"
+
+  init_weights: true
+  checkpoint: "./logs_vol/stb_vol_softmax_VolumetricTriangulationNet@12.11.2021-21:04:46/checkpoints/0028/weights.pth"
+
+  use_gt_pelvis: true
+
+  cuboid_side: 400.0
+
+  volume_size: 64
+  volume_multiplier: 1.0
+  volume_softmax: true
+
+  heatmap_softmax: true
+  heatmap_multiplier: 100.0
+
+  backbone:
+    name: "resnet152"
+    style: "simple"
+
+    init_weights: true
+    checkpoint: "./logs1/stb_alg_AlgebraicTriangulationNet@12.11.2021-17:28:06/checkpoints/0001/weights.pth"
+
+    num_joints: 21
+    num_layers: 152
+
+dataset:
+  kind: "stb"
+
+  train:
+    stb_root: "/media/sda1/dataset/stereo_hand_pose_dataset"
+
+    scale_bbox: 1.3
+
+    shuffle: true
+    randomize_n_views: false
+    min_n_views: null
+    max_n_views: null
+    num_workers: 5
+
+  val:
+    stb_root: "/media/sda1/dataset/stereo_hand_pose_dataset"
+
+    scale_bbox: 1.3
+
+    shuffle: false
+    randomize_n_views: false
+    min_n_views: null
+    max_n_views: null
+    num_workers: 10
