@@ -32,7 +32,7 @@ model:
   init_weights: true
   checkpoint: "./logs_vol/stb_vol_softmax_VolumetricTriangulationNet@12.11.2021-21:04:46/checkpoints/0028/weights.pth"
 
-  use_gt_pelvis: true
+  use_gt_pelvis: false
 
   cuboid_side: 400.0
 
@@ -69,6 +69,7 @@ dataset:
 
   val:
     stb_root: "/media/sda1/dataset/stereo_hand_pose_dataset"
+    pred_results_path: "./logs_vol/eval_stb_vol_softmax_VolumetricTriangulationNet@21.11.2021-18:56:48/checkpoints/0000/results.pkl"
 
     scale_bbox: 1.3
 

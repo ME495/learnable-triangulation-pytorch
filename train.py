@@ -228,8 +228,10 @@ def one_epoch(model, criterion, opt, config, dataloader, device, epoch, n_iters_
     grad_context = torch.autograd.enable_grad if is_train else torch.no_grad
     with grad_context():
         end = time.time()
-
-        iterator = enumerate(tqdm(dataloader, ncols=80))
+        if master:
+            iterator = enumerate(tqdm(dataloader, ncols=80))
+        else:
+            iterator = enumerate(dataloader)
         if is_train and config.opt.n_iters_per_epoch is not None:
             iterator = islice(iterator, config.opt.n_iters_per_epoch)
 

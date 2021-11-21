@@ -145,6 +145,9 @@ class STBMultiViewDataset(Dataset):
 
         sample['indexes'] = item
 
+        if self.keypoints_3d_pred is not None:
+            sample['pred_keypoints_3d'] = self.keypoints_3d_pred[item]
+
         sample.default_factory = None
 
         # self.show(sample['images'][0], sample['keypoints_3d'], sample['proj_matrices'][0])

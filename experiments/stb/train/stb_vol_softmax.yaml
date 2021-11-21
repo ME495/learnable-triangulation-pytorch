@@ -32,7 +32,7 @@ model:
   init_weights: false
   checkpoint: ""
 
-  use_gt_pelvis: true
+  use_gt_pelvis: false
 
   cuboid_side: 400.0
 
@@ -58,6 +58,7 @@ dataset:
 
   train:
     stb_root: "/media/sda1/dataset/stereo_hand_pose_dataset"
+    pred_results_path: "./logs1/stb_alg_AlgebraicTriangulationNet@12.11.2021-17:28:06/checkpoints/0001/results.pkl"
 
     scale_bbox: 1.3
 
